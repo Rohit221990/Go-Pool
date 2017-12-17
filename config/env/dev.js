@@ -4,7 +4,7 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
   domain: {
-    url: 'http://localhost:5500',
+    url: 'http://localhost:3000',
     version: 'v1',
   },
   db: {

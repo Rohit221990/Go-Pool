@@ -8,17 +8,36 @@ var mongoose = require('mongoose'),
  */
 var userSchema = new Schema({
   id: { type: String },
-  name: {
+  firstName: {
     type: String,
     trim: true,
     default: '',
     required: 'Please fill the users name'
   },
-  address: {
+  lastName: {
     type: String,
     trim: true,
-    default: ''
+    default: '',
+    required: 'Please fill the users name'
+  },
+  email: {
+    type: String,
+    trim: true,
+    default: '',
+    required: 'Please fill the users name'
+  },
+  password: {
+    type: String,
+    trim: true,
+    default: '',
+    required: 'Please fill the users name'
   }
+  // },
+  // address: {
+  //   type: String,
+  //   trim: true,
+  //   default: ''
+  // }
 }, { strict: false });
 
 module.exports = userSchema;

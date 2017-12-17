@@ -101,6 +101,10 @@ var initGlobalConfig = function () {
   initGlobalConfigFiles(config, assets);
   config.meanjs = pkg;
 
+  config.utils = {
+    getGlobbedPaths: getGlobbedPaths
+  }
+
   return config;
 };
 
