@@ -11,7 +11,8 @@ var _ = require('lodash'),
   mongoose = require('mongoose'),
   async = require('async'),
   userModel = mongoose.model('Users'),
-  chalk = require('chalk');
+  chalk = require('chalk'),
+  bcrypt = require('bcrypt')
 
 
 /**
@@ -57,9 +58,9 @@ exports.saveUsers = function (req, res) {
   logInConsole('Calling for updating users');
   
   return new Promise(function(resolve, reject) {
-
+   var body = _.get(req, 'body')
     if (_.get(req, 'params.id')) {
-      userModel.update({id : req.params.id}, _.get(req, 'body')).exec()
+      userModel.update({id : req.params.id},body ,{upsert:true}).exec()
         .then(function(user) {
           logInConsole('User has updated successfully', 'success');
           resolve(user); 
@@ -67,18 +68,36 @@ exports.saveUsers = function (req, res) {
           logInConsole('User has not updated successfully because of : '+ err, 'fail');
             reject(err); 
         });
-    } else {
-      var userObj = new userModel(req.body);
-      userObj.save()
-        .then(function(user) { 
-          logInConsole('User has created successfully', 'success');
-          resolve(user); 
-        }, function(err) { 
-          logInConsole('User has not created successfully because of : '+ err, 'fail');
-           reject(err); 
-        });
+    } 
+    else  {
+      userModel.findOne({ 
+          $or:[ { email: body.email }, { username: body.username }]
+      })
+      .then((err, item) => {
+        if(err){
+          return reject(err);
+        }
+      else{
+        var userData = req.body;
+        bcrypt.hash(userData.password, 10, function (err, hash){
+          if (err) {
+            return next(err);
+          }
+          userData.password = hash;
+          var userObj = new userModel(userData);
+          userObj.save()
+            .then(function(user) { 
+              logInConsole('User has created successfully', 'success');
+              resolve(user); 
+            }, function(err) { 
+              logInConsole('User has not created successfully because of : '+ err, 'fail');
+              reject(err); 
+            });
+          })
+        }
+      })
     }
-  });
+  })
 };
 
 exports.deleteUsers = function (req, res) {

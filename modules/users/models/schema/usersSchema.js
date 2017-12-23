@@ -7,30 +7,36 @@ var mongoose = require('mongoose'),
  * Users Schema
  */
 var userSchema = new Schema({
-  id: { type: String },
+  id: { type: Number },
   firstName: {
     type: String,
     trim: true,
     default: '',
-    required: 'Please fill the users name'
+    required: 'Please fill the first name'
   },
   lastName: {
     type: String,
     trim: true,
     default: '',
-    required: 'Please fill the users name'
+    required: 'Please fill the last name'
   },
   email: {
     type: String,
     trim: true,
     default: '',
-    required: 'Please fill the users name'
+    required: 'Please fill the email'
   },
   password: {
     type: String,
     trim: true,
     default: '',
-    required: 'Please fill the users name'
+    required: 'Please fill the password'
+  },
+  username: {
+    type: String,
+    trim: true,
+    default: '',
+    required: 'Please fill the username'
   }
   // },
   // address: {

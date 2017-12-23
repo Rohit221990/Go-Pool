@@ -9,6 +9,7 @@ module.exports = {
   },
   db: {
     uri: 'mongodb://gopool_db:123456@ds013971.mlab.com:13971/gopool',
+    useMongoClient:true,
     options: {
       user: '',
       pass: ''
