@@ -38,7 +38,18 @@ module.exports.saveUsers = function (req, res, done) {
         .then(function(user) { next(null, user); }, function(err) { done(null, err); });
     },
     function (user, next) {
-      res.send({ status: 'success', msg: 'users saved successfully', data: user });
+      var userData = {
+        isRegister: true,
+        _id: user._id,
+        _doc: user._doc,
+        createTime: user.createdAt,
+        email:user.email,
+        firstname:user.firstName,
+        lastname:user.lastName,
+        updateTime:user.updatedAt,
+        username:user.username
+      }
+      res.send({ status: 'success', msg: 'users saved successfully', userData: userData, data: user});
     }
   ], function (err) {
     if (err) {
