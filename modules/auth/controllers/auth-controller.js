@@ -62,7 +62,7 @@ module.exports.signin = function (req, res, next) {
             message: 'User loggedin successfully',
             newUser: req.newUser,
             token: req.token,
-            data: user
+            userData: user
           });
         }, function(err) {
           return res.status(400).send(ErrorHandler.getErrorResponse(err));
