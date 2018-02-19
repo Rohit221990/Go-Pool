@@ -44,12 +44,12 @@ module.exports.saveUsers = function (req, res, done) {
         _doc: user._doc,
         createTime: user.createdAt,
         email:user.email,
-        firstname:user.firstName,
-        lastname:user.lastName,
+        firstName:user.firstName,
+        lastName:user.lastName,
         updateTime:user.updatedAt,
         username:user.username
       }
-      res.send({ status: 'success', msg: 'users saved successfully', userData: userData, data: user});
+      res.send({ status: 'success', msg: 'users saved successfully', data: user});
     }
   ], function (err) {
     if (err) {
