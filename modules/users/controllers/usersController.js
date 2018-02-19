@@ -49,7 +49,7 @@ module.exports.saveUsers = function (req, res, done) {
         updateTime:user.updatedAt,
         username:user.username
       }
-      res.send({ status: 'success', msg: 'users saved successfully', data: user});
+      res.send({ status: 'success', msg: 'users saved successfully', userData: user});
     }
   ], function (err) {
     if (err) {
