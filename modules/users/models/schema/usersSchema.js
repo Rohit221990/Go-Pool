@@ -37,13 +37,43 @@ var userSchema = new Schema({
     trim: true,
     default: '',
     required: 'Please fill the username'
+  },
+  name:{
+    type: String,
+    trim: true,
+    default: '',
+    required: 'Please fill the name'
+  },
+  corporateEmail:{
+    type: String,
+    trim: true,
+    default: '',
+    required: 'Please fill the corporateEmail'
+  },
+  alternativeEmail:{
+    type: String,
+    trim: true,
+    default: '',
+    required: 'Please fill the alternativeEmail'
+  },
+  mobileNumber:{
+    type: String,
+    trim: true,
+    default: '',
+    required: 'Please fill the mobileNumber'
+  },
+  dob: { 
+    type: Date, 
+    default: Date.now ,
+    required: 'Please fill the dob'
+  },
+  gender:{
+    type: String,
+    trim: true,
+    default: '',
+    required: 'Please fill the gender'
   }
-  // },
-  // address: {
-  //   type: String,
-  //   trim: true,
-  //   default: ''
-  // }
+
 }, { strict: false });
 
 module.exports = userSchema;
