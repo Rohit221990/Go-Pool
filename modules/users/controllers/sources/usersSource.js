@@ -59,15 +59,16 @@ exports.saveUsers = function (req, res) {
   
   return new Promise(function(resolve, reject) {
    var body = _.get(req, 'body')
-    if (_.get(req, 'params.id')) {
-      userModel.update({id : req.params.id},body ,{upsert:true}).exec()
-        .then(function(user) {
-          logInConsole('User has updated successfully', 'success');
-          resolve(user); 
-        }, function(err) { 
+    if (_.get(body, 'id')) {
+      userModel.update({id : req.body.id},body, function(err, raw){
+        if(err){
           logInConsole('User has not updated successfully because of : '+ err, 'fail');
-            reject(err); 
-        });
+          reject(err);
+        }else{
+          logInConsole('User has updated successfully', 'success');
+          resolve(raw);
+        }
+      })
     } 
     else  {
       userModel.findOne({ 

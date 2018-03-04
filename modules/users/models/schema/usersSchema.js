@@ -50,7 +50,7 @@ var userSchema = new Schema({
     type: String,
     trim: true
   },
-  dob: String,
+  dob:  { type: String },
   gender:{
     type: String,
     trim: true
