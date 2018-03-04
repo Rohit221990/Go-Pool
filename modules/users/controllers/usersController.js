@@ -47,7 +47,12 @@ module.exports.saveUsers = function (req, res, done) {
         firstName:user.firstName,
         lastName:user.lastName,
         updateTime:user.updatedAt,
-        username:user.username
+        username:user.username,
+        corporateEmail: user.corporateEmail,
+        alternativeEmail: user.alternativeEmail,
+        mobileNumber : user.mobileNumber,
+        dob: user.dob,
+        gender : user.gender
       }
       res.send({ status: 'success', msg: 'users saved successfully', userData: userData, data: user});
     }
