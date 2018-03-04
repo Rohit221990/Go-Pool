@@ -65,12 +65,8 @@ exports.saveUsers = function (req, res) {
           logInConsole('User has not updated successfully because of : '+ err, 'fail');
           reject(err);
         }else{
-          var userObj = new userModel(body);
-          userObj.save()
-          .then(function(user){
-            logInConsole('User has created successfully', 'success');
-            resolve(user); 
-          })
+          logInConsole('User has updated successfully', 'success');
+          resolve(raw);
         }
       })
     } 
