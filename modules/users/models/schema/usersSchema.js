@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
  * Users Schema
  */
 var userSchema = new Schema({
-  id: { type: Number },
+  id: { type: String },
   firstName: {
     type: String,
     trim: true,
@@ -38,40 +38,22 @@ var userSchema = new Schema({
     default: '',
     required: 'Please fill the username'
   },
-  name:{
-    type: String,
-    trim: true,
-    default: '',
-    required: 'Please fill the name'
-  },
   corporateEmail:{
     type: String,
-    trim: true,
-    default: '',
-    required: 'Please fill the corporateEmail'
+    trim: true
   },
   alternativeEmail:{
     type: String,
-    trim: true,
-    default: '',
-    required: 'Please fill the alternativeEmail'
+    trim: true
   },
   mobileNumber:{
     type: String,
-    trim: true,
-    default: '',
-    required: 'Please fill the mobileNumber'
+    trim: true
   },
-  dob: { 
-    type: Date, 
-    default: Date.now ,
-    required: 'Please fill the dob'
-  },
+  dob: String,
   gender:{
     type: String,
-    trim: true,
-    default: '',
-    required: 'Please fill the gender'
+    trim: true
   }
 
 }, { strict: false });
