@@ -23,28 +23,28 @@ var _ = require('lodash'),
 exports.getUsers = function (req) {
   logInConsole('Calling for getting users');
   var query = {};
-  if (_.get(req, 'params.id')) {
-    query = { id: req.params.id };
+  if (_.get(req, 'query.id')) {
+    query = { id: req.query.id };
   }
   return new Promise(function (resolve, reject) {
-    if (req.params.id) {
-      userModel.find(query).exec()
-        .then(function (user) {
-          logInConsole('User has fetched successfully', 'success');
-          resolve(user);
-        }, function (err) {
-          logInConsole('User has not fetched successfully because of : '+ err, 'fail');
-          reject(err);
-        });
+    if (req.query.id) {
+      userModel.findById(query.id).exec()
+      .then(function (users) {
+        logInConsole('User has fetched successfully', 'success');
+        resolve(users);
+      }, function (err) {
+         logInConsole('User has not fetched successfully because of : '+ err, 'fail');
+        reject(err);
+      });
     } else {
       userModel.find(query).exec()
-        .then(function (users) {
-          logInConsole('User has fetched successfully', 'success');
-          resolve(users);
-        }, function (err) {
-           logInConsole('User has not fetched successfully because of : '+ err, 'fail');
-          reject(err);
-        });
+      .then(function (user) {
+        logInConsole('User has fetched successfully', 'success');
+        resolve(user);
+      }, function (err) {
+        logInConsole('User has not fetched successfully because of : '+ err, 'fail');
+        reject(err);
+      });
     }
   });
 };
