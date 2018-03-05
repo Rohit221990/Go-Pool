@@ -31,7 +31,7 @@ exports.getUsers = function (req) {
       userModel.find(query).exec()
       .then(function (users) {
         logInConsole('User has fetched successfully', 'success');
-        resolve(users);
+        resolve(_.first(users));
       }, function (err) {
          logInConsole('User has not fetched successfully because of : '+ err, 'fail');
         reject(err);

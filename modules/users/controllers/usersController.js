@@ -16,14 +16,32 @@ module.exports.getUsers = function (req, res, done) {
     function (next) {
       // user - project (one to one)
       users.getUsers(req)
-        .then(function (users) { next(null, users); }, function (err) { done(null, err); });
-    },
-    function (users, next) {
-      res.send({ status: 'success', data: users });
+        .then(function(user) { next(null, user); }, function (err) { done(null, err); });
+      },
+        function(user, next) {
+        var userData = {
+          isLoggedIn: true,
+          id: user._id,
+          createTime: user.createdAt,
+          email:user.email,
+          firstName:user.firstName,
+          lastName:user.lastName,
+          updateTime:user.updatedAt,
+          username:user.username,
+          alternativeEmail: user.alternativeEmail,
+          corporateEmail: user.corporateEmail,
+          password: user.password,
+          dob:user.date,
+          gender:user.gender,
+          mobileNumber:user.mobileNumber
+        }
+        res.send({ status: 'success', msg: 'users saved successfully', userData: userData, data: user});
     }
-  ], function (err) {
+  ],function (err) {
     if (err) {
+      console.log(err);
       return res.status(400).send(errorHandler.getErrorResponse(err));
+      // return done(err);
     }
   });
 };
