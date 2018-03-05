@@ -73,7 +73,7 @@ module.exports.saveUsers = function (req, res, done) {
         dob:user.date,
         gender:user.gender,
         mobileNumber:user.mobileNumber,
-        registration:false
+        registration:user.registration
       }
       res.send({ status: 'success', msg: 'users saved successfully', userData: userData, data: user});
     }
