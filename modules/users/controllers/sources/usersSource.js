@@ -23,12 +23,12 @@ var _ = require('lodash'),
 exports.getUsers = function (req) {
   logInConsole('Calling for getting users');
   var query = {};
-  if (_.get(req, 'query.id')) {
-    query = { id: req.query.id };
+  if (_.get(req, 'query.username')) {
+    query = {email: req.query.username };
   }
   return new Promise(function (resolve, reject) {
-    if (req.query.id) {
-      userModel.findById(query.id).exec()
+    if (req.query.username) {
+      userModel.find(query).exec()
       .then(function (users) {
         logInConsole('User has fetched successfully', 'success');
         resolve(users);
