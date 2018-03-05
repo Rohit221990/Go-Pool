@@ -54,6 +54,10 @@ var userSchema = new Schema({
   gender:{
     type: String,
     trim: true
+  },
+    registration: {
+    type: Boolean,
+    trim: true
   }
 
 }, { strict: false });
