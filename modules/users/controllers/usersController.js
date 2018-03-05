@@ -33,7 +33,8 @@ module.exports.getUsers = function (req, res, done) {
           password: user.password,
           dob:user.date,
           gender:user.gender,
-          mobileNumber:user.mobileNumber
+          mobileNumber:user.mobileNumber,
+          registration: user.registration
         }
         res.send({ status: 'success', msg: 'users saved successfully', userData: userData, data: user});
     }
@@ -66,11 +67,13 @@ module.exports.saveUsers = function (req, res, done) {
         lastName:user.lastName,
         updateTime:user.updatedAt,
         username:user.username,
-        corporateEmail: user.corporateEmail,
         alternativeEmail: user.alternativeEmail,
-        mobileNumber : user.mobileNumber,
-        dob: user.dob,
-        gender : user.gender
+        corporateEmail: user.corporateEmail,
+        password: user.password,
+        dob:user.date,
+        gender:user.gender,
+        mobileNumber:user.mobileNumber,
+        registration:false
       }
       res.send({ status: 'success', msg: 'users saved successfully', userData: userData, data: user});
     }

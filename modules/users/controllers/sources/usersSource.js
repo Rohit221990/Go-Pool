@@ -53,14 +53,13 @@ exports.getUsers = function (req) {
  * @param: req (object) request object with params & data
  * @return: users (array | object)
  */
-exports.saveUsers = function (req, res) {
-
+exports.saveUsers = function (req, res) {  
   logInConsole('Calling for updating users');
-  
+
   return new Promise(function(resolve, reject) {
    var body = _.get(req, 'body')
     if (_.get(body, 'id')) {
-        userModel.findById(req.body.id, function(err, p){
+      userModel.findById(req.body.id, function(err, p){
         if(err){
           reject(err)
         }
@@ -70,6 +69,7 @@ exports.saveUsers = function (req, res) {
           p.mobileNumber = body.mobileNumber;
           p.date = body.date;
           p.gender = body.gender;
+          p.registration = true;
           var userObj = new userModel(p);
           userObj.save()
             .then(function(user) { 
@@ -81,7 +81,15 @@ exports.saveUsers = function (req, res) {
             });
           }
         });
-    } 
+      }
+      // userModel.update({id : req.body.id},body,{upsert:true,safe:true}, function(err, raw){
+      //   if(err){
+      //     reject(err);
+      //   }else{
+      //     resolve(raw);
+      //   }
+      // })
+     
     else  {
       userModel.findOne({ 
           $or:[ { email: body.email }, { username: body.username }]
@@ -91,7 +99,7 @@ exports.saveUsers = function (req, res) {
           return reject(err);
         }
       else{
-        var userData = req.body;
+        var userData =  req.body;
         bcrypt.hash(userData.password, 10, function (err, hash){
           if (err) {
             return next(err);
@@ -112,6 +120,7 @@ exports.saveUsers = function (req, res) {
     }
   })
 };
+
 
 exports.deleteUsers = function (req, res) {
 
