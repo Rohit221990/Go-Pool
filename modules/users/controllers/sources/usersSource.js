@@ -60,15 +60,27 @@ exports.saveUsers = function (req, res) {
   return new Promise(function(resolve, reject) {
    var body = _.get(req, 'body')
     if (_.get(body, 'id')) {
-      userModel.update({id : req.body.id},body, function(err, raw){
+        userModel.findById(req.body.id, function(err, p){
         if(err){
-          logInConsole('User has not updated successfully because of : '+ err, 'fail');
-          reject(err);
-        }else{
-          logInConsole('User has updated successfully', 'success');
-          resolve(raw);
+          reject(err)
         }
-      })
+        else{
+          p.corporateEmail = body.corporateEmail;
+          p.alternativeEmail = body.alternativeEmail;
+          p.mobileNumber = body.mobileNumber;
+          p.date = body.date;
+          p.gender = body.gender;
+          var userObj = new userModel(p);
+          userObj.save()
+            .then(function(user) { 
+              logInConsole('User has created successfully', 'success');
+              resolve(user); 
+            }, function(err) { 
+              logInConsole('User has not created successfully because of : '+ err, 'fail');
+              reject(err); 
+            });
+          }
+        });
     } 
     else  {
       userModel.findOne({ 
