@@ -7,6 +7,7 @@ var path = require('path'),
   async = require('async'),
   users = require('./sources/usersSource'),
   errorHandler = require(path.resolve('./modules/core/controllers/error-controller'));
+var jwt = require('jsonwebtoken');  
 
 /**
  * Get users Data
@@ -36,7 +37,9 @@ module.exports.getUsers = function (req, res, done) {
           mobileNumber:user.mobileNumber,
           registration: user.registration
         }
-        res.send({ status: 'success', msg: 'users saved successfully', userData: userData, data: user});
+        jwt.sign({user: user}, 'secretkey',(err, token) => {
+          res.send({ status: 'success', msg: 'users saved successfully', userData: userData, data: user, token:token});
+        })
     }
   ],function (err) {
     if (err) {
@@ -75,7 +78,9 @@ module.exports.saveUsers = function (req, res, done) {
         mobileNumber:user.mobileNumber,
         registration:user.registration
       }
-      res.send({ status: 'success', msg: 'users saved successfully', userData: userData, data: user});
+      jwt.sign({user: user}, 'secretkey',(err, token) => {
+          res.send({ status: 'success', msg: 'users login successfully', userData: userData, data: user, token:token});    
+      })
     }
   ], function (err) {
     if (err) {
