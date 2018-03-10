@@ -22,30 +22,36 @@ var _ = require('lodash'),
  */
 exports.getUsers = function (req) {
   logInConsole('Calling for getting users');
-  var query = {};
+  var findByEmail = {};
   if (_.get(req, 'query.username')) {
-    query = {email: req.query.username };
+    findByEmail = {email: req.query.username };
   }
   return new Promise(function (resolve, reject) {
     if (req.query.username) {
-      userModel.find(query).exec()
-      .then(function (users) {
-        logInConsole('User has fetched successfully', 'success');
-        resolve(_.first(users));
+      userModel.find(findByEmail).exec()        
+      .then(function (user) {
+        bcrypt.hash(req.query.password,10, function (err, hash){
+          if (err) {
+            reject(err);
+          }
+          logInConsole(hash)
+          bcrypt.compare(req.query.password, hash, function(err, res){
+            if (res === true) {
+              logInConsole('User has fetched successfully', 'success');
+              resolve(_.first(user));
+            } else {
+              reject(err);
+            }
+          })
+        })
       }, function (err) {
          logInConsole('User has not fetched successfully because of : '+ err, 'fail');
         reject(err);
       });
-    } else {
-      userModel.find(query).exec()
-      .then(function (user) {
-        logInConsole('User has fetched successfully', 'success');
-        resolve(user);
-      }, function (err) {
-        logInConsole('User has not fetched successfully because of : '+ err, 'fail');
-        reject(err);
-      });
     }
+    else{
+        reject('User has not fetched successfully');
+    } 
   });
 };
 /**
