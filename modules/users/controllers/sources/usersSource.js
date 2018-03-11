@@ -76,14 +76,14 @@ exports.saveUsers = function (req, res) {
           p.dob = body.date;
           p.gender = body.gender;
           p.registration = true;
-          p.imagePath = body.imagePath
+          p.imagePath = body.imagePath;
           var userObj = new userModel(p);
           userObj.save()
             .then(function(user) { 
-              logInConsole('User has created successfully', 'success');
+              logInConsole('User has uodated successfully', 'success');
               resolve(user); 
             }, function(err) { 
-              logInConsole('User has not created successfully because of : '+ err, 'fail');
+              logInConsole('User has not uodated successfully because of : '+ err, 'fail');
               reject(err); 
             });
           }
