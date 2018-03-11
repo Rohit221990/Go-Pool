@@ -62,8 +62,7 @@ module.exports.saveUsers = function (req, res, done) {
     function (user, next) {
       var userData = {
         isRegister: true,
-        _id: user._id,
-        _doc: user._doc,
+        id: user._id,
         createTime: user.createdAt,
         email:user.email,
         firstName:user.firstName,
