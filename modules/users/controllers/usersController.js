@@ -75,7 +75,8 @@ module.exports.saveUsers = function (req, res, done) {
         dob:user.date,
         gender:user.gender,
         mobileNumber:user.mobileNumber,
-        registration:user.registration
+        registration:user.registration,
+        imagePath:user.imagePath
       }
       jwt.sign({user: user}, 'secretkey',(err, token) => {
           res.send({ status: 'success', msg: 'users login successfully', userData: userData, data: user, token:token});    

@@ -58,6 +58,10 @@ var userSchema = new Schema({
     registration: {
     type: Boolean,
     trim: true
+  },
+  imagePath:{
+    type: String,
+    trim: true
   }
 
 }, { strict: false });
