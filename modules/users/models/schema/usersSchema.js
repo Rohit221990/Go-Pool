@@ -62,7 +62,7 @@ var userSchema = new Schema({
   imagePath:{
     type: String,
     trim: true,
-    default: '',
+    default: ''
   }
 
 }, { strict: false });
