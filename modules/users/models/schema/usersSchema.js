@@ -59,9 +59,9 @@ var userSchema = new Schema({
     type: Boolean,
     trim: true
   },
-  imagePath:{
-    type: String,
-    trim: true
+  image:{
+    data: Buffer,
+    contentType: String 
   }
 
 }, { strict: false });

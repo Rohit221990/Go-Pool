@@ -14,7 +14,6 @@ var _ = require('lodash'),
   chalk = require('chalk'),
   bcrypt = require('bcrypt')
 
-
 /**
  * Get Users details
  * @param: id (int|all) category id or all
@@ -76,7 +75,7 @@ exports.saveUsers = function (req, res) {
           p.dob = body.dob;
           p.gender = body.gender;
           p.registration = true;
-          p.imagePath = body.imagePath;
+          p.image.data = body.imagePath
           var userObj = new userModel(p);
           userObj.save()
             .then(function(user) { 
