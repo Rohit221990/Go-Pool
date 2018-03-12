@@ -1,5 +1,4 @@
 'use strict';
-var bodyParser = require('body-parser')
 /**
  * Module dependencies.
  */
