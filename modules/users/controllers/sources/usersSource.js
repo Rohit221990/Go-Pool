@@ -75,7 +75,7 @@ exports.saveUsers = function (req, res) {
           p.dob = body.dob;
           p.gender = body.gender;
           p.registration = true;
-          p.image.data = body.imagePath
+          p.imagePath = body.imagePath
           var userObj = new userModel(p);
           userObj.save()
             .then(function(user) { 
