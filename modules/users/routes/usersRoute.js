@@ -14,9 +14,5 @@ module.exports = function (app, router) {
    router.delete('/users/:id', users.deleteUsers);
   // load the BOM router in the app
   app.use('/api/v1', router);
-  app.use( bodyParser.text({
-    type : 'application/text-enriched', 
-    limit: '1mb'
-}) ); 
 
 };
