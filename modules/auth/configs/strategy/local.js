@@ -8,7 +8,7 @@ require('../../../users/models/usersModel');
 var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
   UserModel = require('mongoose').model('Users'),
-  bcrypt  = require('bcrypt')
+  bcrypt  = require('bcrypt-nodejs')
 
 module.exports = function () {
   // Use local strategy

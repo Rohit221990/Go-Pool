@@ -12,7 +12,7 @@ var _ = require('lodash'),
   async = require('async'),
   userModel = mongoose.model('Users'),
   chalk = require('chalk'),
-  bcrypt = require('bcrypt')
+  bcrypt = require('bcrypt-nodejs')
 
 /**
  * Get Users details
