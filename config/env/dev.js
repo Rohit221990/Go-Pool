@@ -8,7 +8,7 @@ module.exports = {
     version: 'v1',
   },
   db: {
-    uri: 'mongodb://rohit221990:rohit221990@ds237868.mlab.com:37868/gopool',
+    uri: 'mongodb://rohit221990:R_ohit22@ds237868.mlab.com:37868/gopool',
     useMongoClient:true,
     options: {
       user: '',
